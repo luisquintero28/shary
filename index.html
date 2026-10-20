@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shary, siempre en nuestro corazón</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky1:#fde4ec; --sky2:#d9e6ff; --sky3:#fff1d0;
+  --ink:#3c3552; --muted:#6f6688; --card:rgba(255,255,255,.8); --line:rgba(233,162,59,.5);
+  --gold:#d9902a; --rose:#ef7fa0; --star:#f0b84a; --starop:.75; --cloud:rgba(255,255,255,.95); --glow:rgba(255,190,100,.6);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --sky1:#0a0c2b; --sky2:#25286b; --sky3:#7b4a8e;
+    --ink:#f3eeff; --muted:#bdb4d9; --card:rgba(22,20,64,.68); --line:rgba(246,194,91,.4);
+    --gold:#f6c25b; --rose:#f59ab8; --star:#ffffff; --starop:1; --cloud:rgba(255,255,255,.13); --glow:rgba(255,214,130,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --sky1:#0a0c2b; --sky2:#25286b; --sky3:#7b4a8e;
+  --ink:#f3eeff; --muted:#bdb4d9; --card:rgba(22,20,64,.68); --line:rgba(246,194,91,.4);
+  --gold:#f6c25b; --rose:#f59ab8; --star:#ffffff; --starop:1; --cloud:rgba(255,255,255,.13); --glow:rgba(255,214,130,.5);
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;min-height:100%;display:grid;place-items:center;padding:28px 18px;overflow-x:hidden;position:relative;
+  background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,var(--sky3) 100%);
+  color:var(--ink);font-family:'Lora',Georgia,serif;
+}
+.cielo{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.estrella{position:absolute;border-radius:50%;background:var(--star);box-shadow:0 0 6px var(--star);opacity:.1;
+  animation:brilla var(--d,4s) ease-in-out var(--t,0s) infinite}
+@keyframes brilla{0%,100%{opacity:.1;transform:scale(.7)}50%{opacity:var(--starop);transform:scale(1.2)}}
+.nube{position:absolute;left:-10vmax;bottom:-40px;width:60vmax;height:22vmax;border-radius:50%;background:var(--cloud);
+  filter:blur(28px);animation:deriva 60s linear infinite alternate}
+.nube.b{left:35vw;bottom:-70px;opacity:.8;animation-duration:85s;animation-direction:alternate-reverse}
+@keyframes deriva{from{transform:translateX(-14vw)}to{transform:translateX(14vw)}}
+
+.contenido{position:relative;z-index:1;width:min(560px,100%);text-align:center}
+.intro{transition:opacity .85s ease,transform .85s ease}
+.intro.sale{opacity:0;transform:translateY(-14px)}
+.huella{width:124px;height:124px;margin:0 auto 4px;filter:drop-shadow(0 0 18px var(--glow));animation:flota 5s ease-in-out infinite}
+.huella .halo{fill:none;stroke:var(--gold);stroke-width:3}
+.huella .pata{fill:var(--gold)}
+@keyframes flota{50%{transform:translateY(-8px)}}
+h1{font-family:'Dancing Script',cursive,serif;font-size:clamp(3.4rem,15vw,5.4rem);margin:.05em 0 0;line-height:1;font-weight:700}
+.sub{margin:.5em 0 2.2em;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-size:.78rem}
+.boton{
+  font-family:'Dancing Script',cursive,serif;font-size:1.95rem;font-weight:700;color:#4a2b00;border:0;border-radius:999px;
+  padding:.5em 1.7em;cursor:pointer;background:linear-gradient(135deg,#ffe29a,#f3b048 55%,var(--rose));
+  box-shadow:0 8px 30px var(--glow),inset 0 1px 0 rgba(255,255,255,.7);animation:late 2.6s ease-in-out infinite;transition:transform .2s;
+}
+.boton:hover{transform:scale(1.06)}
+.boton:focus-visible,.volver:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+@keyframes late{50%{box-shadow:0 8px 46px var(--glow),0 0 0 10px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.7)}}
+.pista{display:block;margin-top:1.1em;color:var(--muted);font-style:italic;font-size:.92rem}
+
+.tarjeta{display:none;background:var(--card);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:26px;padding:clamp(24px,6vw,44px);box-shadow:0 18px 60px rgba(0,0,0,.16)}
+body.abierto .tarjeta{display:block;animation:entra 1.2s ease both}
+body.abierto .intro{display:none}
+@keyframes entra{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.tarjeta h2{font-family:'Dancing Script',cursive,serif;font-size:clamp(2.1rem,8.5vw,3rem);margin:.1em 0 .55em;line-height:1.1}
+.tarjeta .adorno{color:var(--gold);letter-spacing:.5em;margin:-.2em 0 1.1em;font-size:.9rem}
+.linea{opacity:0;transform:translateY(10px);animation:aparece 1.2s ease forwards;animation-delay:calc(1s + var(--i) * 1.8s);
+  line-height:1.8;font-size:clamp(1.02rem,3.7vw,1.16rem);margin:0 0 1.1em}
+@keyframes aparece{to{opacity:1;transform:none}}
+.firma{font-family:'Dancing Script',cursive,serif;font-size:1.9rem;color:var(--gold);font-weight:700;margin-top:1.3em}
+.volver{font:inherit;font-size:.9rem;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:.45em 1.2em;cursor:pointer}
+.volver:hover{color:var(--ink)}
+
+.galeria h3{font-family:'Dancing Script',cursive,serif;font-size:1.9rem;margin:1.2em 0 .6em}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.mini{padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);cursor:pointer;color:var(--ink);font:inherit;transition:transform .2s}
+.mini:hover{transform:scale(1.03)}
+.mini:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.mini img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.mini span{display:block;padding:.45em .5em;font-size:.82rem;line-height:1.3}
+.visor{position:fixed;inset:0;z-index:5;background:rgba(8,8,28,.93);display:flex;align-items:center;justify-content:center;
+  padding:calc(env(safe-area-inset-top,0px) + 16px) 12px calc(env(safe-area-inset-bottom,0px) + 16px)}
+.visor[hidden]{display:none}
+.visor figure{margin:0;max-width:min(92vw,900px);text-align:center;color:#f3eeff}
+.visor img{max-width:100%;max-height:78vh;border-radius:12px;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+.visor figcaption{margin-top:.8em;font-style:italic}
+.v-cerrar,.v-nav{position:absolute;background:rgba(255,255,255,.16);color:#fff;border:0;border-radius:50%;width:46px;height:46px;font-size:1.8rem;line-height:1;cursor:pointer}
+.v-cerrar{top:calc(env(safe-area-inset-top,0px) + 12px);right:14px}
+.v-nav{top:50%;transform:translateY(-50%)}
+.v-prev{left:10px}
+.v-next{right:10px}
+.v-nav[hidden]{display:none}
+.v-cerrar:focus-visible,.v-nav:focus-visible{outline:3px solid #fff}
+
+.chispa{position:fixed;z-index:2;pointer-events:none;left:var(--x);top:var(--y);font-size:var(--s,16px);color:var(--gold);
+  animation:sube var(--dur,3s) ease-out forwards}
+@keyframes sube{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(40deg)}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .estrella{opacity:.5}
+}
+</style>
+</head>
+<body>
+<div class="cielo" aria-hidden="true"><div class="nube"></div><div class="nube b"></div></div>
+
+<main class="contenido">
+  <section class="intro">
+    <svg class="huella" viewBox="0 0 100 100" aria-hidden="true">
+      <ellipse class="halo" cx="50" cy="11" rx="23" ry="6"/>
+      <ellipse class="pata" cx="50" cy="70" rx="21" ry="16"/>
+      <ellipse class="pata" cx="23" cy="52" rx="8" ry="11" transform="rotate(-22 23 52)"/>
+      <ellipse class="pata" cx="40" cy="36" rx="8" ry="12"/>
+      <ellipse class="pata" cx="60" cy="36" rx="8" ry="12"/>
+      <ellipse class="pata" cx="77" cy="52" rx="8" ry="11" transform="rotate(22 77 52)"/>
+    </svg>
+    <h1>Shary</h1>
+    <p class="sub">Siempre en nuestro corazón</p>
+    <button class="boton" id="abrir" type="button">Mi angelito</button>
+    <span class="pista">Toca para abrir tu mensaje</span>
+  </section>
+
+  <section class="tarjeta" aria-live="polite">
+    <h2>Mi mejor amiga desde el cielo</h2>
+    <p class="adorno" aria-hidden="true">✦ ✦ ✦</p>
+    <p class="linea" style="--i:0">Durante muchos años, Shary fue más que una mascota: fue tu sombra, tu alegría al llegar a casa y esa compañera que nunca te falló.</p>
+    <p class="linea" style="--i:1">Estuvo en tus días buenos para celebrarlos contigo y en los difíciles para quedarse a tu lado, sin pedir nada, solo con su mirada y su colita moviéndose.</p>
+    <p class="linea" style="--i:2">Los años que compartieron no se miden en calendarios; se miden en paseos, en juegos, en saludos de mañana y en noches de compañía en silencio.</p>
+    <p class="linea" style="--i:3">Hoy su ausencia pesa porque su amor era enorme. Pero ese amor no se fue: se quedó en cada recuerdo, y desde el cielo sigue cuidándote.</p>
+    <p class="linea" style="--i:4">Gracias por haberla querido tanto. Ella lo sabía, lo sabe y lo seguirá sabiendo desde ahí arriba, corriendo libre y esperándote con la misma alegría de siempre.</p>
+    <p class="linea firma" style="--i:5">Shary, siempre en nuestro corazón ♥</p>
+    <div class="linea galeria" id="galeria" style="--i:6" hidden>
+      <h3>Recuerdos</h3>
+      <div class="rejilla" id="rejilla"></div>
+    </div>
+    <p class="linea" style="--i:7"><button class="volver" id="volver" type="button">Volver a leer</button></p>
+  </section>
+</main>
+
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+  <button class="v-cerrar" id="v-cerrar" type="button" aria-label="Cerrar">×</button>
+  <button class="v-nav v-prev" id="v-prev" type="button" aria-label="Foto anterior">‹</button>
+  <figure><img id="v-img" alt=""><figcaption id="v-txt"></figcaption></figure>
+  <button class="v-nav v-next" id="v-next" type="button" aria-label="Foto siguiente">›</button>
+</div>
+
+<script src="fotos.js"></script>
+<script>
+(function(){
+  var reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cielo = document.querySelector('.cielo');
+  for (var i = 0; i < 70; i++) {
+    var e = document.createElement('i');
+    e.className = 'estrella';
+    var s = 1 + Math.random() * 2.6;
+    e.style.cssText = 'left:' + (Math.random() * 100) + '%;top:' + (Math.random() * 85) + '%;width:' + s + 'px;height:' + s + 'px;--d:' + (3 + Math.random() * 4) + 's;--t:' + (Math.random() * 5) + 's';
+    cielo.appendChild(e);
+  }
+  var btn = document.getElementById('abrir');
+  var intro = document.querySelector('.intro');
+  function chispas(x, y) {
+    var sym = ['✦', '♥', '✧', '✦'];
+    for (var i = 0; i < 26; i++) {
+      var c = document.createElement('span');
+      c.className = 'chispa';
+      c.textContent = sym[i % sym.length];
+      c.style.cssText = '--x:' + x + 'px;--y:' + y + 'px;--dx:' + ((Math.random() - .5) * 340) + 'px;--dy:' + (-80 - Math.random() * 320) + 'px;--s:' + (12 + Math.random() * 16) + 'px;--dur:' + (2 + Math.random() * 2) + 's';
+      document.body.appendChild(c);
+      (function(el){ setTimeout(function(){ el.remove(); }, 4200); })(c);
+    }
+  }
+  btn.addEventListener('click', function () {
+    var r = btn.getBoundingClientRect();
+    if (!reducido) chispas(r.left + r.width / 2, r.top + r.height / 2);
+    intro.classList.add('sale');
+    setTimeout(function () {
+      document.body.classList.add('abierto');
+      window.scrollTo(0, 0);
+    }, reducido ? 0 : 850);
+  });
+  document.getElementById('volver').addEventListener('click', function () {
+    document.body.classList.remove('abierto');
+    intro.classList.remove('sale');
+  });
+  var fotos = (typeof FOTOS !== 'undefined' && FOTOS.length) ? FOTOS : [];
+  var galeria = document.getElementById('galeria');
+  var rejilla = document.getElementById('rejilla');
+  var visor = document.getElementById('visor');
+  var vimg = document.getElementById('v-img');
+  var vtxt = document.getElementById('v-txt');
+  var vprev = document.getElementById('v-prev');
+  var vnext = document.getElementById('v-next');
+  var actual = 0;
+  function mostrar(n) {
+    actual = (n + fotos.length) % fotos.length;
+    vimg.src = fotos[actual].src;
+    vimg.alt = fotos[actual].texto || 'Recuerdo con Shary';
+    vtxt.textContent = fotos[actual].texto || '';
+  }
+  function abrirVisor(n) {
+    vprev.hidden = vnext.hidden = fotos.length < 2;
+    mostrar(n);
+    visor.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('v-cerrar').focus();
+  }
+  function cerrarVisor() {
+    visor.hidden = true;
+    document.body.style.overflow = '';
+  }
+  if (fotos.length) {
+    galeria.hidden = false;
+    fotos.forEach(function (f, n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'mini';
+      var im = document.createElement('img');
+      im.src = f.src;
+      im.alt = f.texto || 'Recuerdo con Shary';
+      im.loading = 'lazy';
+      b.appendChild(im);
+      if (f.texto) {
+        var t = document.createElement('span');
+        t.textContent = f.texto;
+        b.appendChild(t);
+      }
+      b.addEventListener('click', function () { abrirVisor(n); });
+      rejilla.appendChild(b);
+    });
+  }
+  document.getElementById('v-cerrar').addEventListener('click', cerrarVisor);
+  visor.addEventListener('click', function (e) { if (e.target === visor) cerrarVisor(); });
+  vprev.addEventListener('click', function () { mostrar(actual - 1); });
+  vnext.addEventListener('click', function () { mostrar(actual + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (visor.hidden) return;
+    if (e.key === 'Escape') cerrarVisor();
+    if (e.key === 'ArrowLeft' && fotos.length > 1) mostrar(actual - 1);
+    if (e.key === 'ArrowRight' && fotos.length > 1) mostrar(actual + 1);
+  });
+})();
+</script>
+</body>
+</html>
